@@ -35,6 +35,8 @@ ball.shape('square')
 ball.color('snow')
 ball.penup()
 ball.goto(0, 0)
+ball.dx = 2 # d is for delta or 'change'. everytime the ball moves, it moves by 2 pixels
+ball.dy = 2
 
 
 # Paddle Functions
@@ -77,3 +79,25 @@ window.onkey(paddleBDown, 'Down')
 # MAIN GAME LOOP
 while True:
     window.update()
+
+    #move the ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    #border checking - once it gets to a certain point, we want it to bounce off.
+    # we need to compare the balls Y coordinate for the top border
+    if ball.ycor() > 330:
+        ball.sety(330)
+        ball.dy *= -1
+    if ball.ycor() < -330:
+        ball.sety(-330)
+        ball.dy *= -1
+    # we need to compare the balls x coordinate for the top border
+
+    if ball.xcor() > 380:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
+    if ball.xcor() < -380:
+        ball.goto(0, 0)
+        ball.dx *= -1
