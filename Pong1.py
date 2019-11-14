@@ -9,6 +9,11 @@ window.bgcolor('lightsteelblue')
 window.setup(width=800, height=700)
 window.tracer(0)
 
+# Score
+PlayerOneScore = 0
+PlayerTwoScore = 0
+
+
 # Paddle A
 paddleA = turtle.Turtle()
 paddleA.speed(0)#speed for animation not for on screen speed
@@ -38,6 +43,14 @@ ball.goto(0, 0)
 ball.dx = 2 # d is for delta or 'change'. everytime the ball moves, it moves by 2 pixels
 ball.dy = 2
 
+# SCORE PEN
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color('white')
+pen.penup()
+pen.hideturtle()
+pen.goto(0, -245)
+pen.write('Player 1 : 0  Player 2 : 0', align='center', font=('Garamond', 25, 'normal'))
 
 # Paddle Functions
 
@@ -46,25 +59,30 @@ def paddleAUp():
     y = paddleA.ycor() #ycor method is from the turtle module. returns Y coordinates.
     y += 20
     paddleA.sety(y)
-
+    print 'PADDLE A:', paddleA.ycor()
 
 def paddleADown():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleA.ycor() #ycor method is from the turtle module. returns Y coordinates.
     y -= 20
     paddleA.sety(y)
+    print 'PADDLE A:', paddleA.ycor()
 
 def paddleBUp():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleB.ycor()  # ycor method is from the turtle module. returns Y coordinates.
     y += 20
     paddleB.sety(y)
+    print 'PADDLE B:', paddleB.ycor()
+
 
 def paddleBDown():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleB.ycor()  # ycor method is from the turtle module. returns Y coordinates.
     y -= 20
     paddleB.sety(y)
+    print 'PADDLE B:', paddleB.ycor()
+
 
 # Keyboard Binding
 window.listen()
@@ -85,19 +103,36 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
     #border checking - once it gets to a certain point, we want it to bounce off.
-    # we need to compare the balls Y coordinate for the top border
+    # we need to compare the ball's Y coordinate for the top border
     if ball.ycor() > 330:
         ball.sety(330)
         ball.dy *= -1
     if ball.ycor() < -330:
         ball.sety(-330)
         ball.dy *= -1
-    # we need to compare the balls x coordinate for the top border
+    # we need to compare the ball's x coordinate for the top border
 
     if ball.xcor() > 380:
         ball.goto(0, 0)
         ball.dx *= -1
+        PlayerOneScore += 1
+        pen.clear()
+        pen.write('Player 1 : %s Player 2 : %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
+        print 'PlayerOneScore', PlayerOneScore
 
     if ball.xcor() < -380:
         ball.goto(0, 0)
+        ball.dx *= -1
+        PlayerTwoScore += 1
+        pen.clear()
+        pen.write('Player 1 : %s Player 2 : %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
+        print 'PlayerTwoScore', PlayerTwoScore
+
+    # Ball bouncing off the paddle
+    if (ball.xcor() > 340 and ball.xcor() < 350 )and (ball.ycor() < paddleB.ycor() + 40 and ball.ycor() > paddleB.ycor() - 40):
+        ball.setx(340)
+        ball.dx *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350 )and (ball.ycor() < paddleA.ycor() + 40 and ball.ycor() > paddleA.ycor() - 40):
+        ball.setx(-340)
         ball.dx *= -1
