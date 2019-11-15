@@ -1,3 +1,4 @@
+#Raspbery Pi Branch
 #Module for Simple Graphics
 
 import turtle
@@ -112,7 +113,7 @@ while True:
     if ball.xcor() > 380:
         ball.setx(0)
         ball.dx *= -1
-        os.system('afplay score.wav&')
+        os.system('aplay score.wav&')
         PlayerOneScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
@@ -121,7 +122,7 @@ while True:
     if ball.xcor() < -380:
         ball.goto(0, 0)
         ball.dx *= -1
-        os.system('afplay score.wav&')
+        os.system('aplay score.wav&')
         PlayerTwoScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
@@ -131,9 +132,9 @@ while True:
     if (ball.xcor() > 340 and ball.xcor() < 350 )and (ball.ycor() < paddleB.ycor() + 40 and ball.ycor() > paddleB.ycor() - 40):
         ball.setx(340)
         ball.dx *= -1
-        os.system('afplay paddle.wav&')
+        os.system('aplay paddle.wav&')
 
     if (ball.xcor() < -340 and ball.xcor() > -350 )and (ball.ycor() < paddleA.ycor() + 40 and ball.ycor() > paddleA.ycor() - 40):
         ball.setx(-340)
         ball.dx *= -1
-        os.system('afplay paddle.wav&')
+        os.system('aplay paddle.wav&')
