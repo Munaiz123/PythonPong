@@ -38,7 +38,7 @@ paddleB.goto(365, 0)
 
 ball = turtle.Turtle()
 ball.speed(0)#speed for animation not for on screen speed
-ball.shape('square')
+ball.shape('circle')
 ball.color('snow')
 ball.penup()
 ball.goto(0, 0)
@@ -53,6 +53,16 @@ pen.penup()
 pen.hideturtle()
 pen.goto(0, -245)
 pen.write('Player One: 0        Player Two: 0', align='center', font=('Garamond', 25, 'normal'))
+
+# PAWS PEN
+pawsPen = turtle.Turtle()
+pawsPen.speed(0)
+pawsPen.color('red')
+pawsPen.penup
+pawsPen.hideturtle()
+pawsPen.goto(0,0)
+
+
 
 # Paddle Functions
 
@@ -80,6 +90,22 @@ def paddleBDown():
     y -= 20
     paddleB.sety(y)
 
+pause = False
+
+def gamePaws():
+    if pause == False:
+        print("PAAAAAAWWWSS", 'FALSE')
+        pause = True
+        pawsPen.write('Tri-ing 2 paws', align='center', font=('Garamond', 25, 'normal'))
+        
+    else:
+        print('un-PAAWSS')
+        pawsPen.clear()
+        pause = False
+        
+    
+
+    
 
 # Keyboard Binding
 window.listen()
@@ -89,6 +115,9 @@ window.onkey(paddleADown, 's')
 
 window.onkey(paddleBUp, 'Up')
 window.onkey(paddleBDown, 'Down')
+
+window.onkey(gamePaws, 'p')
+
 
 
 # MAIN GAME LOOP
@@ -117,7 +146,7 @@ while True:
         PlayerOneScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
-        print 'PlayerOneScore', PlayerOneScore
+        #print 'PlayerOneScore', PlayerOneScore
 
     if ball.xcor() < -380:
         ball.goto(0, 0)
@@ -126,7 +155,7 @@ while True:
         PlayerTwoScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
-        print 'PlayerTwoScore', PlayerTwoScore
+        #print 'PlayerTwoScore', PlayerTwoScore
 
     # Ball bouncing off the paddle
     if (ball.xcor() > 340 and ball.xcor() < 350 )and (ball.ycor() < paddleB.ycor() + 40 and ball.ycor() > paddleB.ycor() - 40):
