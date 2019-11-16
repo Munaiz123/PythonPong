@@ -19,7 +19,7 @@ PlayerTwoScore = 0
 
 # Paddle A
 paddleA = turtle.Turtle()
-paddleA.speed(0)#speed for animation not for on screen speed
+paddleA.speed(50)#speed for animation not for on screen speed
 paddleA.shape('square')
 paddleA.color('pink')
 paddleA.shapesize(stretch_wid=5, stretch_len=1)
@@ -28,7 +28,7 @@ paddleA.goto(-365, 0)
 
 # Paddle B
 paddleB = turtle.Turtle()
-paddleB.speed(0)#speed for animation not for on screen speed
+paddleB.speed(50)#speed for animation not for on screen speed
 paddleB.shape('square')
 paddleB.color('pink')
 paddleB.shapesize(stretch_wid=5, stretch_len=1)
@@ -38,17 +38,17 @@ paddleB.goto(365, 0)
 # Ball
 
 ball = turtle.Turtle()
-ball.speed(0)#speed for animation not for on screen speed
+ball.speed(50)#speed for animation not for on screen speed
 ball.shape('circle')
 ball.color('snow')
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 2 # d is for delta or 'change'. everytime the ball moves, it moves by 2 pixels
-ball.dy = 2
+ball.dx = 2.4 # d is for delta or 'change'. everytime the ball moves, it moves by 2 pixels
+ball.dy = 2.4
 
 # SCORE PEN
 pen = turtle.Turtle()
-pen.speed(0)
+pen.speed(50)
 pen.color('white')
 pen.penup()
 pen.hideturtle()
@@ -57,7 +57,7 @@ pen.write('Player One: 0        Player Two: 0', align='center', font=('Garamond'
 
 # PAWS PEN
 pawsPen = turtle.Turtle()
-pawsPen.speed(0)
+pawsPen.speed(50)
 pawsPen.color('red')
 pawsPen.penup
 pawsPen.hideturtle()
@@ -70,25 +70,25 @@ pawsPen.goto(0,0)
 def paddleAUp():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleA.ycor() #ycor method is from the turtle module. returns Y coordinates.
-    y += 20
+    y += 25
     paddleA.sety(y)
 
 def paddleADown():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleA.ycor() #ycor method is from the turtle module. returns Y coordinates.
-    y -= 20
+    y -= 25
     paddleA.sety(y)
 
 def paddleBUp():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleB.ycor()  # ycor method is from the turtle module. returns Y coordinates.
-    y += 20
+    y += 25
     paddleB.sety(y)
 
 def paddleBDown():
     # Y increases as Y goes up / decreases as it goes down
     y = paddleB.ycor()  # ycor method is from the turtle module. returns Y coordinates.
-    y -= 20
+    y -= 25
     paddleB.sety(y)
 
 pause = False
@@ -145,7 +145,7 @@ while True:
         ball.dx *= -1
         os.system('aplay score.wav&')
         PlayerOneScore += 1
-        ledLight.flicker()
+        ledLight.redFlicker()
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
 
@@ -154,7 +154,7 @@ while True:
         ball.goto(0, 0)
         ball.dx *= -1
         os.system('aplay score.wav&')
-        ledLight.flicker()
+        ledLight.greenFlicker()
         PlayerTwoScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
