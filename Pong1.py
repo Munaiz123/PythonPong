@@ -5,8 +5,6 @@ import turtle
 import os
 import ledLight
 
-ledLight.flicker() 
-
 # Game Screen
 window = turtle.Screen()
 window.title('Pong by @amunaizing')
@@ -150,7 +148,7 @@ while True:
         ledLight.flicker()
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
-        #print 'PlayerOneScore', PlayerOneScore
+
 
     if ball.xcor() < -380:
         ball.goto(0, 0)
@@ -160,7 +158,7 @@ while True:
         PlayerTwoScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
-        #print 'PlayerTwoScore', PlayerTwoScore
+        
 
     # Ball bouncing off the paddle
     if (ball.xcor() > 340 and ball.xcor() < 350 )and (ball.ycor() < paddleB.ycor() + 40 and ball.ycor() > paddleB.ycor() - 40):
