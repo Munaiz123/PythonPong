@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+
 def flicker():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(18, GPIO.OUT)
@@ -10,4 +11,5 @@ def flicker():
 
 	GPIO.cleanup
 
-flicker()
+def test():
+	print('TESTING FROM LEDLIGHT.PY')

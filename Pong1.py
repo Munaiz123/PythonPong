@@ -3,6 +3,9 @@
 
 import turtle
 import os
+import ledLight
+
+ledLight.flicker() 
 
 # Game Screen
 window = turtle.Screen()
@@ -144,6 +147,7 @@ while True:
         ball.dx *= -1
         os.system('aplay score.wav&')
         PlayerOneScore += 1
+        ledLight.flicker()
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
         #print 'PlayerOneScore', PlayerOneScore
@@ -152,6 +156,7 @@ while True:
         ball.goto(0, 0)
         ball.dx *= -1
         os.system('aplay score.wav&')
+        ledLight.flicker()
         PlayerTwoScore += 1
         pen.clear()
         pen.write('Player One: %s       Player Two: %s' %(PlayerOneScore, PlayerTwoScore), align='center', font=('Garamond', 25, 'normal'))
