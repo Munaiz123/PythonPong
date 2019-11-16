@@ -10,6 +10,3 @@ def flicker():
 
 
 	GPIO.cleanup
-
-def test():
-	print('TESTING FROM LEDLIGHT.PY')
