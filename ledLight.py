@@ -8,10 +8,7 @@ def redFlicker():
 	GPIO.output(18, GPIO.HIGH)
 	time.sleep(.1)
 	GPIO.output(18, GPIO.LOW)
-
-
-	GPIO.cleanup 
-
+	
 
 def greenFlicker():
 	GPIO.setup(23, GPIO.OUT)
@@ -19,5 +16,4 @@ def greenFlicker():
 	time.sleep(.1)
 	GPIO.output(23, GPIO.LOW)
 
-
-	GPIO.cleanup 
+GPIO.cleanup()

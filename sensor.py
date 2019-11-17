@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 import time
+import ledLight
 
+GPIO.setwarnings(False)
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
 TRIG = 2
@@ -17,42 +20,34 @@ GPIO.setup(ECHO, GPIO.IN)
 
 
 
-GPIO.output(TRIG,False)
-time.sleep(1)
-
-GPIO.output(TRIG,True)
-time.sleep(0.0001)
-GPIO.output(TRIG,False)
-
-print('START')
-
-try:
-	while True:
-
-		while GPIO.input(ECHO) == 0:
-			start = time.time()
-			
-		while GPIO.input(ECHO) == 1:
-			end = time.time()
-
-		total = end - start
-
-
-		cm = total/0.000058
-		inches = total/0.000148
+def getDistance():
+	GPIO.output(TRIG,True)
+	time.sleep(0.0001)
+	GPIO.output(TRIG,False)
+	
+	while GPIO.input(ECHO) == False:
+		start = time.time()
+	
+	while GPIO.input(ECHO) == True:
+		end = time.time()
 		
-		print('inches: {} && cm: {}'.format(inches,cm))			
-			
-		if inches < 6:
-			GPIO.output(RED, GPIO.HIGH)
-			GPIO.output(GREEN, GPIO.LOW)
-		if inches > 6:
-			GPIO.output(RED, GPIO.LOW)
-			#~ GPIO.output(GREEN, GPIO.LOW)
-			GPIO.output(GREEN, GPIO.HIGH)
-			
-			
-			
-except KeyboardInterrupt:
-	print('Cleaning Up')
-	GPIO.cleanup()
+	totalTime = end - start
+	
+	inches = totalTime/ 0.000148
+	cm = totalTime / 0.000058
+	
+	print('INCHES: {}, CM: {}'.format(inches,cm))
+	
+	return inches
+	
+	
+
+
+while True:
+	distance = getDistance()
+	time.sleep(1)
+	
+	if distance < 6:
+		ledLight.redFlicker()
+	elif distance > 6:
+		ledLight.greenFlicker()
