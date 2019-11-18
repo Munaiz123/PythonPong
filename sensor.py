@@ -3,8 +3,8 @@ import time
 import ledLight
 
 GPIO.setwarnings(False)
-GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
+#~ GPIO.cleanup()
 
 TRIG = 2
 ECHO = 21
@@ -48,6 +48,11 @@ while True:
 	time.sleep(1)
 	
 	if distance < 6:
-		ledLight.redFlicker()
+		#~ ledLight.redFlicker()
+		GPIO.output(RED, GPIO.HIGH)
 	elif distance > 6:
+		GPIO.output(RED, GPIO.LOW)
 		ledLight.greenFlicker()
+
+
+GPIO.cleanup()
